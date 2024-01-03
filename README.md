@@ -1,2 +1,2 @@
 # P5NameTBLEditor
- NAME.TBL (re)packer for P5(R)
+ NAME TBL (re)packer for P5(R)
