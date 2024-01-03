@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ref\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Amicitia.IO">
+      <HintPath>ref\Amicitia.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="AtlusScriptLibrary">
+      <HintPath>ref\AtlusScriptLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir &quot;$(TargetDir)Charsets&quot; 2&gt;nul&#xD;&#xA;xcopy /E /Y &quot;$(ProjectDir)Charsets&quot; &quot;$(TargetDir)Charsets&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.pdb&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.deps.json&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.runtimeconfig.dev.json&quot;" />
+  </Target>
+
+</Project>
