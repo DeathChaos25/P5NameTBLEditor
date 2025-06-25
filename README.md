@@ -10,7 +10,7 @@
 
 1. **Download** the [latest release](https://github.com/DeathChaos25/P5NameTBLEditor/releases/latest)
 2. **Install** [.NET Desktop Runtime 9.0.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) (or newer) if not already installed
-3. **Run** the program and:
+3. Extract the program from the downloaded 7z (using something like 7zip) and:
    - Drag a `NAME.TBL` file onto the EXE to extract
    - Drag an extracted `NAME` folder onto the EXE to repack
   
