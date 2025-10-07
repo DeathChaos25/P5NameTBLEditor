@@ -15,7 +15,12 @@ namespace P5NameTBLEditor
         {
             if (args.Length == 0)
             {
-                System.Console.WriteLine("P5RNameTBLEditor:\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's exe\nPress any key to exit");
+                System.Console.WriteLine("P5RNameTBLEditor:\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's exe (NOT THIS WINDOW)\n" +
+                    "Optional second argument for encoding, the available encodings are:\n\n" +
+                    "P5\nP5_Chinese\nP5_Korean\n" +
+                    "P5R_EFIGS (will be used by default if no encoding is provided)\n" +
+                    "P5R_Japanese\nP5R_CHS\nP5R_CHT\n" +
+                    "\nPress any key to exit");
                 Console.ReadKey();
             }
             else
@@ -23,27 +28,68 @@ namespace P5NameTBLEditor
                 FileInfo arg0 = new FileInfo(args[0]);
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+                // Determine encoding from second argument if provided
+                Encoding encoding = GetEncodingFromArgs(args);
+
                 if (arg0.Name.ToLower().Contains("name") && arg0.Name.ToLower().Contains(".tbl"))
                 {
-                    DumpNameTBL(args);
+                    DumpNameTBL(args, encoding);
                 }
                 else if (arg0.Name == "NAME")
                 {
                     Console.WriteLine("NAME tbl folder was input\n");
-                    CreateNameTBLFromFolder(args);
+                    CreateNameTBLFromFolder(args, encoding);
                 }
                 else Console.WriteLine("https://youtu.be/huTMNGaqoAA");
             }
         }
 
-        static void DumpNameTBL(string[] args)
+        static Encoding GetEncodingFromArgs(string[] args)
+        {
+            if (args.Length < 2)
+            {
+                Console.WriteLine("No encoding specified, using default: P5R_EFIGS");
+                return AtlusEncoding.Persona5RoyalEFIGS;
+            }
+
+            string encodingArg = args[1].ToUpper();
+            switch (encodingArg)
+            {
+                case "P5":
+                    Console.WriteLine("Using encoding: P5");
+                    return AtlusEncoding.Persona5;
+                case "P5_CHINESE":
+                    Console.WriteLine("Using encoding: P5_Chinese");
+                    return AtlusEncoding.Persona5Chinese;
+                case "P5_KOREAN":
+                    Console.WriteLine("Using encoding: P5_Korean");
+                    return AtlusEncoding.Persona5Korean;
+                case "P5R_JAPANESE":
+                    Console.WriteLine("Using encoding: P5R_Japanese");
+                    return AtlusEncoding.Persona5RoyalJapanese;
+                case "P5R_EFIGS":
+                    Console.WriteLine("Using encoding: P5R_EFIGS");
+                    return AtlusEncoding.Persona5RoyalEFIGS;
+                case "P5R_CHS":
+                    Console.WriteLine("Using encoding: P5R_CHS");
+                    return AtlusEncoding.Persona5RoyalChineseSimplified;
+                case "P5R_CHT":
+                    Console.WriteLine("Using encoding: P5R_CHT");
+                    return AtlusEncoding.Persona5RoyalChineseTraditional;
+                default:
+                    Console.WriteLine($"Unknown encoding '{args[1]}', using default: P5R_EFIGS");
+                    return AtlusEncoding.Persona5RoyalEFIGS;
+            }
+        }
+
+        static void DumpNameTBL(string[] args, Encoding encoding)
         {
             FileInfo arg0 = new FileInfo(args[0]);
             Console.WriteLine($"Attempting to convert {arg0.Name}");
 
             var allNameTBLLists = new List<List<string>>();
 
-            using (BinaryObjectReader NAMETBLFile = new BinaryObjectReader(args[0], Endianness.Big, AtlusEncoding.Persona5RoyalEFIGS))
+            using (BinaryObjectReader NAMETBLFile = new BinaryObjectReader(args[0], Endianness.Big, encoding))
             {
                 for (int i = 0; i < tblNumber / 2; i++)
                 {
@@ -111,8 +157,8 @@ namespace P5NameTBLEditor
             }
             System.Threading.Thread.Sleep(1000);
         }
-        
-        static void CreateNameTBLFromFolder(string[] args)
+
+        static void CreateNameTBLFromFolder(string[] args, Encoding encoding)
         {
             FileInfo arg0 = new FileInfo(args[0]);
             var savePath = Path.Combine(arg0.FullName + ".TBL");
@@ -120,7 +166,7 @@ namespace P5NameTBLEditor
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            using (BinaryObjectWriter NAMETBLFile = new BinaryObjectWriter(savePath, Endianness.Big, AtlusEncoding.Persona5RoyalEFIGS))
+            using (BinaryObjectWriter NAMETBLFile = new BinaryObjectWriter(savePath, Endianness.Big, encoding))
             {
                 for (int i = 0; i < tblNumber / 2; i++)
                 {
@@ -129,7 +175,7 @@ namespace P5NameTBLEditor
                     string targetTXTFile = Path.TrimEndingDirectorySeparator(arg0.FullName) + "\\" + $"{i:D2} - " + GetTBLDirName(tblNumber, i) + ".txt";
                     Console.WriteLine("Reading txt file " + targetTXTFile);
 
-                    NameTBLStrings = File.ReadAllLines(targetTXTFile, AtlusEncoding.Persona5RoyalEFIGS);
+                    NameTBLStrings = File.ReadAllLines(targetTXTFile, encoding);
 
                     List<long> StringPointers = new List<long>();
 

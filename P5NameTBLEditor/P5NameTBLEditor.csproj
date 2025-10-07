@@ -18,6 +18,30 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Charsets\P5.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5R_CHS.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5R_CHT.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5R_EFIGS.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5R_Japanese.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5_Chinese.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Charsets\P5_Korean.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="mkdir &quot;$(TargetDir)Charsets&quot; 2&gt;nul&#xD;&#xA;xcopy /E /Y &quot;$(ProjectDir)Charsets&quot; &quot;$(TargetDir)Charsets&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.pdb&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.deps.json&quot;&#xD;&#xA;del &quot;$(TargetDir)P5NameTBLEditor.runtimeconfig.dev.json&quot;" />
   </Target>
