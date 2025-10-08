@@ -9,17 +9,19 @@ namespace P5NameTBLEditor
 {
     internal class Program
     {
-        public static int tblNumber = 38; // number of Name TBL sections, 34 for P5, 38 for P5R
+        public static int tblNumber = 34; // number of Name TBL sections, 34 for P5, 38 for P5R
 
         static void Main(string[] args)
         {
             if (args.Length == 0)
             {
-                System.Console.WriteLine("P5RNameTBLEditor:\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's exe (NOT THIS WINDOW)\n" +
-                    "Optional second argument for encoding, the available encodings are:\n\n" +
+                System.Console.WriteLine("P5NameTBLEditor (P5 Version):\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's .exe file (NOT THIS WINDOW)\n" +
+                    "Optional second argument for encoding\n" +
+                    "\nExample:\nP5NameTBLEditor.exe \"path\\to\\NAME.TBL\\file\\or\\folder\" P5R_CHS\n" +
+                    "\nSupported Encodings:\n" +
                     "P5\nP5_Chinese\nP5_Korean\n" +
                     "P5R_EFIGS (will be used by default if no encoding is provided)\n" +
-                    "P5R_Japanese\nP5R_CHS\nP5R_CHT\n" +
+                    "P5R_Japanese\nP5R_CHS (Chinese Simplified)\nP5R_CHT (Chinese Traditional)\nP5R_Korean\n" +
                     "\nPress any key to exit");
                 Console.ReadKey();
             }
