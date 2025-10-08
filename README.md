@@ -8,13 +8,33 @@
 
 ## How to Use
 
-1. **Download** the [latest release](https://github.com/DeathChaos25/P5NameTBLEditor/releases/latest)
-2. **Install** [.NET Desktop Runtime 9.0.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) (or newer) if not already installed
-3. Extract the program from the downloaded 7z (using something like 7zip) and:
-   - Drag a `NAME.TBL` file onto the EXE to extract
-   - Drag an extracted `NAME` folder onto the EXE to repack
-  
+1. **Download** the [latest release](https://github.com/DeathChaos25/P5NameTBLEditor/releases/latest) (or click the download button above)
+2. **Install** [.NET Desktop Runtime 9.0.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) (or newer) if not already installed  (or click the .NET button above)
+3. Extract the program from the downloaded 7z (using something like 7zip)
 
-Credits:  
-1. Amicitia.IO: [https://github.com/tge-was-taken/Amicitia.IO](https://github.com/tge-was-taken/Amicitia.IO)
-2. Atlus-Script-Tools (for the character encoding): [https://github.com/tge-was-taken/Atlus-Script-Tools](https://github.com/tge-was-taken/Atlus-Script-Tools)
+### Basic Usage (Drag & Drop)
+- Drag a `NAME.TBL` file onto the tool's .EXE file to extract
+- Drag an extracted `NAME` folder onto the tool's .EXE file to repack
+
+### Advanced Usage (Command Line)
+You can also run the program with command line arguments:
+
+P5NameTBLEditor.exe "path\to\NAME.TBL\file\or\folder" [encoding]
+
+Examples:  
+P5NameTBLEditor.exe "C:\game_files\NAME.TBL"  
+P5NameTBLEditor.exe "C:\game_files\NAME" P5R_CHS  
+
+### Supported Encodings
+- `P5`
+- `P5_Chinese`
+- `P5_Korean`
+- `P5R_EFIGS` *(default)*
+- `P5R_CHS` (Chinese Simplified)
+- `P5R_CHT` (Chinese Traditional)
+- `P5R_Japanese`
+- `P5R_Korean`
+
+## Credits
+- Amicitia.IO: [https://github.com/tge-was-taken/Amicitia.IO](https://github.com/tge-was-taken/Amicitia.IO)
+- Atlus-Script-Tools (for the character encoding): [https://github.com/tge-was-taken/Atlus-Script-Tools](https://github.com/tge-was-taken/Atlus-Script-Tools)
