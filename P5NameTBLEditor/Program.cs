@@ -15,7 +15,7 @@ namespace P5NameTBLEditor
         {
             if (args.Length == 0)
             {
-                System.Console.WriteLine("P5NameTBLEditor (P5 Version):\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's .exe file (NOT THIS WINDOW)\n" +
+                System.Console.WriteLine("P5RNameTBLEditor (P5 Version):\nUsage:\nDrag and Drop either a NAME.TBL or a NAME tbl folder into the program's .exe file (NOT THIS WINDOW)\n" +
                     "Optional second argument for encoding\n" +
                     "\nExample:\nP5NameTBLEditor.exe \"path\\to\\NAME.TBL\\file\\or\\folder\" P5R_CHS\n" +
                     "\nSupported Encodings:\n" +
@@ -78,6 +78,9 @@ namespace P5NameTBLEditor
                 case "P5R_CHT":
                     Console.WriteLine("Using encoding: P5R_CHT");
                     return AtlusEncoding.Persona5RoyalChineseTraditional;
+                case "P5R_KOREAN":
+                    Console.WriteLine("Using encoding: P5R_Korean");
+                    return AtlusEncoding.Persona5RoyalKorean;
                 default:
                     Console.WriteLine($"Unknown encoding '{args[1]}', using default: P5R_EFIGS");
                     return AtlusEncoding.Persona5RoyalEFIGS;
